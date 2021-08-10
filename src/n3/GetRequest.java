@@ -72,15 +72,19 @@ public class GetRequest {
 			in.close();
 			//print result
 			
-			//i am aware this code is god-awful. i do not know any other way to remove those """"""""""""""""helpful"""""""""""""""" square brackets
 			String CLCRJSONString = response.toString();
-			String newString = CLCRJSONString.replace("["," ");
-			CLCRJSONString = newString;
-			newString = CLCRJSONString.replace("]"," ");
-			CLCRJSONString = newString;
-			
+			String newString = "{" + CLCRJSONString + "}";
 			
 			System.out.println("JSON String Result " + CLCRJSONString);
+			
+			JSONObject obj = new JSONObject(CLCRJSONString);
+			JSONArray arr = obj.getJSONArray("source"); // notice that `"posts": [...]`
+			for (int i = 0; i < arr.length(); i++)
+			{
+			    String post_id = arr.getJSONObject(i).getString("post_id");
+			}
+			
+			
 		} else {
 			System.out.println("Error: HTTP Code " + CLCRResponseCode);
 		}
