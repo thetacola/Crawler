@@ -73,15 +73,17 @@ public class GetRequest {
 			//print result
 			
 			String CLCRJSONString = response.toString();
-			String newString = "{" + CLCRJSONString + "}";
+			String newString = "{ " + '"' + "allCLCRLangs" + '"' + ":" + CLCRJSONString + "}";
+			CLCRJSONString = newString;
 			
 			System.out.println("JSON String Result " + CLCRJSONString);
 			
 			JSONObject obj = new JSONObject(CLCRJSONString);
-			JSONArray arr = obj.getJSONArray("source"); // notice that `"posts": [...]`
+			JSONArray arr = obj.getJSONArray("allCLCRLangs"); // notice that `"posts": [...]`
 			for (int i = 0; i < arr.length(); i++)
 			{
-			    String post_id = arr.getJSONObject(i).getString("post_id");
+			    String lang_name = arr.getJSONObject(i).getString("name");
+			    System.out.println(lang_name); //debug
 			}
 			
 			
