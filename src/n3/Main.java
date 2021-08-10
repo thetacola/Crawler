@@ -9,6 +9,6 @@ public class Main {
 		System.out.println("--BRCL GET--");
 		GetRequest.getBRCL();
 		System.out.println("--CLCR GET--");
-		GetRequest.getCLCR();
+		String[][] CLCRArray = GetRequest.getCLCR();
 	}
 }

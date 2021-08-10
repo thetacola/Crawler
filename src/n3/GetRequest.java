@@ -54,7 +54,7 @@ public class GetRequest {
 			System.out.println("Error: HTTP Code " + BRCLResponseCode);
 		}
 	}
-	public static void getCLCR() throws IOException {
+	public static String[][] getCLCR() throws IOException {
 		URL getCLCRURL = new URL("http://www.kreativekorp.com/clcr/json.php");
 		String readLine = null;
 		HttpURLConnection CLCRConnection = (HttpURLConnection) getCLCRURL.openConnection();
@@ -80,15 +80,26 @@ public class GetRequest {
 			
 			JSONObject obj = new JSONObject(CLCRJSONString);
 			JSONArray arr = obj.getJSONArray("allCLCRLangs"); // notice that `"posts": [...]`
+			String[][] langs = new String[arr.length()][7];
 			for (int i = 0; i < arr.length(); i++)
 			{
-			    String lang_name = arr.getJSONObject(i).getString("name");
-			    System.out.println(lang_name); //debug
+				
+			    String source = arr.getJSONObject(i).getString("source");
+			    String codeShort = arr.getJSONObject(i).getString("short");
+			    String codeLong = arr.getJSONObject(i).getString("long");
+			    String name = arr.getJSONObject(i).getString("name");
+			    String url = arr.getJSONObject(i).getString("url");
+			    String author = arr.getJSONObject(i).getString("author");
+			    String date = arr.getJSONObject(i).getString("date");
+			    String[] langProperties = {source, codeShort, codeLong, name, url, author, date};
+			    langs[i] = langProperties;
 			}
 			
+			return langs;
 			
 		} else {
 			System.out.println("Error: HTTP Code " + CLCRResponseCode);
+			return null;
 		}
 	}
 	
