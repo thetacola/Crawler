@@ -81,6 +81,7 @@ public class GetRequest {
 			JSONObject obj = new JSONObject(CLCRJSONString);
 			JSONArray arr = obj.getJSONArray("allCLCRLangs"); // notice that `"posts": [...]`
 			String[][] langs = new String[arr.length()][7];
+			System.out.println("Amount of languages: " + arr.length());
 			for (int i = 0; i < arr.length(); i++)
 			{
 				
