@@ -1,4 +1,4 @@
-package n3;
+package org.conlang.database.crawler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
